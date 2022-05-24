@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaEdit } from 'react-icons/fa'
 import { useContext } from 'react'
 import TaskContext from '../context/TaskContext'
 
@@ -10,13 +10,17 @@ const progress = {
 }
 
 function TaskItem({ item }) {
-    const {deleteTask} = useContext(TaskContext)
+    const { deleteTask, editTask } = useContext(TaskContext)
 
     const [select, setSelect] = useState(progress.a)
-    
+
+    const todo = select === 'To do' ? 'to-do' : ''
+    const inProgress = select === 'In progress' ? 'in-progress' : ''
+    const complete = select === 'Complete' ? 'complete' : ''
+
     return (
-        <div>
-            <div className='card'>
+        <div className={`${todo}${inProgress}${complete}`}>
+            <div className='small-card'>
                 <div>
                     <select value={select} onChange={e => setSelect(e.target.value)}>
                         {Object.entries(progress).map(prog => (
@@ -24,9 +28,12 @@ function TaskItem({ item }) {
                         ))}
                     </select>
                 </div>
-                <div className='important-display'>{item.name}</div>
+                {item.name}
                 <button className='close' onClick={() => deleteTask(item.id)}>
                     <FaTrash color='red' size='15' />
+                </button>
+                <button className='edit' onClick={() => editTask(item)}>
+                    <FaEdit size='15' />
                 </button>
                 <div className='text-display'>{item.text}</div>
             </div>
@@ -36,15 +43,3 @@ function TaskItem({ item }) {
 
 export default TaskItem
 
-
-
-
-
-//   return (
-//     < select
-//       onChange={e => handleAddrTypeChange(e)}
-//       className="browser-default custom-select" >
-//       {
-//         Add.map((address, key) => <option value={key}>{address}</option>)
-//       }
-//     </select >)

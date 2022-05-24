@@ -5,9 +5,7 @@ function TaskCounter() {
     const { task } = useContext(TaskContext)
 
     function tasks() {
-        if (task.length === 1) {
-            return <h4>{task.length} task to do!</h4>
-        } else return <h4>{task.length} tasks to do!</h4>
+        return <h4>Total task: {task.length}</h4>
     }
 
     return (
