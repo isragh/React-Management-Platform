@@ -16,9 +16,9 @@ function TaskList() {
     return (
         // <AnimatePresence>
             <div className="table">
-                <h5 className="to-do">Tasks to do</h5>
-                <h5 className="in-progress">Tasks in progress</h5>
-                <h5 className="complete">Completed tasks</h5>
+                <h5 className="to-do">To do</h5>
+                <h5 className="in-progress">In progress</h5>
+                <h5 className="complete">Completed</h5>
                 {taskMap}
             </div>
         // </AnimatePresence>
